@@ -13,7 +13,7 @@ function Import-DoceboTranscript {
     $APIHeaders = @{Authorization = "Bearer $bearer_token"}
     $CSVHeaders = "USERNAME","LASTNAME","FIRSTNAME","DATEENROLLED","DATECOMPLETED","STATUS","SCORE"
 
-    Import-CSV -Path .\TestTranscriptTransfer.csv -Header $CSVHeaders | ForEach-Object {
+    Import-CSV -Path "$ImportPath" -Header $CSVHeaders | ForEach-Object {
 
         $BodyJSON = @"
         {
