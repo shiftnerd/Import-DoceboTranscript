@@ -7,7 +7,7 @@ function Import-DoceboTranscript {
     param (
         [Parameter(Mandatory,HelpMessage='Enter the bearer token!')] [string[]] $bearer_token,
         [Parameter(Mandatory,HelpMessage='Enter the course code!')] [string[]] $CourseCode,
-        [Parameter(Mandatory,HelpMessage='Enter the course code!')] [string[]] $ImportPath,
+        [Parameter(Mandatory,HelpMessage='Enter the Import CSV Path!')] [string[]] $ImportPath,
         $Url = "https://UPDATEURLHERE.docebosaas.com/learn/v1/enrollment/batch"
     )
     $APIHeaders = @{Authorization = "Bearer $bearer_token"}
