@@ -9,10 +9,9 @@ function Import-DoceboTranscript {
         [Parameter(Mandatory,HelpMessage='Enter the course code!')] [string[]] $CourseCode,
         [Parameter(Mandatory,HelpMessage='Enter the Import CSV Path!')] [string[]] $ImportPath,
         $Url = "https://UPDATEURLHERE.docebosaas.com/learn/v1/enrollment/batch",
-        $CSVHeaders = "USERNAME","LASTNAME","FIRSTNAME","DATEENROLLED","DATECOMPLETED","STATUS","SCORE"
     )
     $APIHeaders = @{Authorization = "Bearer $bearer_token"}
-
+    $CSVHeaders = "USERNAME","LASTNAME","FIRSTNAME","DATEENROLLED","DATECOMPLETED","STATUS","SCORE"
 
     Import-CSV -Path "$ImportPath" -Header $CSVHeaders | ForEach-Object {
 
