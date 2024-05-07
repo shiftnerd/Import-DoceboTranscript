@@ -5,15 +5,15 @@
 
 function Import-DoceboTranscript {
     param (
-        [Parameter(Mandatory,HelpMessage='Enter the bearer token!')] [string[]] $bearer_token,
-        [Parameter(Mandatory,HelpMessage='Enter the course code!')] [string[]] $CourseCode,
-        [Parameter(Mandatory,HelpMessage='Enter the Import CSV Path!')] [string[]] $ImportPath,
-        $Url = "https://UPDATEURLHERE.docebosaas.com/learn/v1/enrollment/batch",
+        [Parameter(Mandatory, HelpMessage = 'Enter the bearer token!')] [string[]] $bearer_token,
+        [Parameter(Mandatory, HelpMessage = 'Enter the course code!')] [string[]] $CourseCode,
+        [Parameter(Mandatory, HelpMessage = 'Enter the Import CSV Path!')] [string[]] $ImportPath,
+        $Url = 'https://UPDATEURLHERE.docebosaas.com/learn/v1/enrollment/batch'
     )
-    $APIHeaders = @{Authorization = "Bearer $bearer_token"}
-    $CSVHeaders = "USERNAME","LASTNAME","FIRSTNAME","DATEENROLLED","DATECOMPLETED","STATUS","SCORE"
+    $APIHeaders = @{Authorization = "Bearer $bearer_token" }
+    $CSVHeaders = 'USERNAME', 'LASTNAME', 'FIRSTNAME', 'DATEENROLLED', 'DATECOMPLETED', 'STATUS', 'SCORE'
 
-    Import-CSV -Path "$ImportPath" -Header $CSVHeaders | ForEach-Object {
+    Import-Csv -Path "$ImportPath" -Header $CSVHeaders | ForEach-Object {
 
         $BodyJSON = @"
         {
@@ -32,15 +32,15 @@ function Import-DoceboTranscript {
       "trigger_gamification": false
         }
 "@
-    $result = Invoke-RestMethod -Method 'Post' -Uri $url -Headers $APIHeaders -Body $BodyJSON
+        $result = Invoke-RestMethod -Method 'Post' -Uri $url -Headers $APIHeaders -Body $BodyJSON
     
-    #Change this to Write-Verbose later, but for now print it out during testing.
-    Write-Output "Course ID:"
-    Write-Output $result.data.course_id
-    Write-Output "User ID:"
-    Write-Output $result.data.user_id
-    Write-Output "Message:"
-    Write-Output $result.data.message
+        #Change this to Write-Verbose later, but for now print it out during testing.
+        Write-Output 'Course ID:'
+        Write-Output $result.data.course_id
+        Write-Output 'User ID:'
+        Write-Output $result.data.user_id
+        Write-Output 'Message:'
+        Write-Output $result.data.message
     }
 }
-Import-DoceboTranscript -bearer_token "INSERTBEARERTOKENHERE" -CourseCode "NET4 - ALL" -ImportPath ".\TestTranscriptTransfer.csv"
+Import-DoceboTranscript -bearer_token 'INSERTBEARERTOKENHERE' -CourseCode 'NET4 - ALL' -ImportPath '.\TestTranscriptTransfer.csv'
